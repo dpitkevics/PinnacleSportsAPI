@@ -10,7 +10,8 @@ class Response (object):
     def __decode_content(content):
         return content.decode('utf-8')
 
-    def __parse_content(self, content):
-        e = minidom.parse(content)
+    @staticmethod
+    def __parse_content(content):
+        e = minidom.parseString(content)
 
-        print(e)
+        return e

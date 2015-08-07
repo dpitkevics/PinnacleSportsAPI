@@ -3,6 +3,8 @@ from urllib.parse import urlencode
 from PinnacleSportsAPI.auth import Auth
 from PinnacleSportsAPI.request import Request
 
+from PinnacleSportsAPI.responses.sports import SportsResponse
+
 
 class PinnacleSportsAPI (object):
     ENDPOINT_URL = 'https://api.pinnaclesports.com/v1/'
@@ -22,8 +24,11 @@ class PinnacleSportsAPI (object):
 
         request_url += '?%s' % request_query
 
-        self.request.do_request(request_url)
+        return self.request.do_request(request_url)
 
     def get_sports(self):
         response = self.__execute('sports')
 
+        sports_response = SportsResponse(response.content)
+
+        return sports_response.get_parsed_response()
