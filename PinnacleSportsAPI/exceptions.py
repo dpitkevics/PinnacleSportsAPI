@@ -1,0 +1,4 @@
+
+
+class ParameterError (Exception):
+    pass
