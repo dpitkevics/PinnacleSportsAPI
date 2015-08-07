@@ -4,6 +4,7 @@ from PinnacleSportsAPI.auth import Auth
 from PinnacleSportsAPI.request import Request
 
 from PinnacleSportsAPI.responses.sports import SportsResponse
+from PinnacleSportsAPI.responses.leagues import LeaguesResponse
 
 
 class PinnacleSportsAPI (object):
@@ -32,3 +33,12 @@ class PinnacleSportsAPI (object):
         sports_response = SportsResponse(response.content)
 
         return sports_response.get_parsed_response()
+
+    def get_leagues(self, sports_id):
+        response = self.__execute('leagues', {
+            'sportId': sports_id,
+        })
+
+        leagues_response = LeaguesResponse(response.content)
+
+        return leagues_response.get_parsed_response()
