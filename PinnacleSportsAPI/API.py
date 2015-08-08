@@ -8,6 +8,8 @@ from PinnacleSportsAPI.responses.sports import SportsResponse
 from PinnacleSportsAPI.responses.leagues import LeaguesResponse
 from PinnacleSportsAPI.responses.feed import Feed, FeedResponse
 from PinnacleSportsAPI.responses.currencies import CurrenciesResponse
+from PinnacleSportsAPI.responses.client_balance import ClientBalanceResponse
+from PinnacleSportsAPI.responses.line import LineResponse
 
 
 class PinnacleSportsAPI (object):
@@ -86,3 +88,26 @@ class PinnacleSportsAPI (object):
         currencies_response = CurrenciesResponse(response.content)
 
         return currencies_response.get_parsed_response()
+
+    def get_client_balance(self):
+        response = self.__execute('client/balance')
+
+        client_balance_response = ClientBalanceResponse(response.content)
+
+        return client_balance_response.get_parsed_response()
+
+    def get_line(self,
+                 sport_id,
+                 league_id,
+                 event_id,
+                 period_number,
+                 bet_type,
+                 odds_format,
+                 team=None,
+                 side=None,
+                 handicap=None):
+        response = self.__execute('line')
+
+        line_response = LineResponse(response.content)
+
+        return line_response.get_parsed_response()
