@@ -7,6 +7,7 @@ from PinnacleSportsAPI.exceptions import ParameterError
 from PinnacleSportsAPI.responses.sports import SportsResponse
 from PinnacleSportsAPI.responses.leagues import LeaguesResponse
 from PinnacleSportsAPI.responses.feed import Feed, FeedResponse
+from PinnacleSportsAPI.responses.currencies import CurrenciesResponse
 
 
 class PinnacleSportsAPI (object):
@@ -78,3 +79,10 @@ class PinnacleSportsAPI (object):
         feed_response = FeedResponse(response.content)
 
         return feed_response.get_parsed_response()
+
+    def get_currencies(self):
+        response = self.__execute('currencies')
+
+        currencies_response = CurrenciesResponse(response.content)
+
+        return currencies_response.get_parsed_response()
